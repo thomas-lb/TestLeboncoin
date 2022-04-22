@@ -16,9 +16,12 @@ class TitleRepository(
             Result.Success(titles)
         } catch (t: Throwable) {
             try {
-                Result.Success(localSource.getTitles())
+                val titles = localSource.getTitles()
+                if (titles.isNotEmpty()) {
+                    Result.Success(titles)
+                } else Result.Error.NotFound()
             } catch (t: Throwable) {
-                Result.Error(t)
+                Result.Error.Unknown()
             }
         }
     }

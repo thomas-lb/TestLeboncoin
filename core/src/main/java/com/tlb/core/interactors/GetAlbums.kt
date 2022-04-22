@@ -18,6 +18,7 @@ class GetAlbums(private val titleRepository: TitleRepository) {
                     )
                 }.filterNotNull()
         )
-        is Result.Error -> Result.Error(result.throwable)
+        is Result.Error.NotFound -> Result.Error.NotFound()
+        is Result.Error.Unknown -> Result.Error.Unknown()
     }
 }

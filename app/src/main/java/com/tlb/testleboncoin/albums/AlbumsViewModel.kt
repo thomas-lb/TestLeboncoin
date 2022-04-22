@@ -15,13 +15,18 @@ class AlbumsViewModel(
     private val _albumsData = MutableLiveData<List<Album>>()
     val albumsData = _albumsData as LiveData<List<Album>>
 
+    private val _errorData = MutableLiveData<Result.Error<List<Album>>>()
+    val errorData = _errorData as LiveData<Result.Error<List<Album>>>
+
     init {
-        viewModelScope.launch {
-            val result = getAlbums()
-            when(result) {
-                is Result.Success -> _albumsData.postValue(result.data)
-                is Result.Error -> println("oups")
-            }
+        fetchData()
+    }
+
+    fun fetchData() = viewModelScope.launch {
+        val result = getAlbums()
+        when(result) {
+            is Result.Success -> _albumsData.postValue(result.data)
+            is Result.Error -> _errorData.postValue(result)
         }
     }
 }

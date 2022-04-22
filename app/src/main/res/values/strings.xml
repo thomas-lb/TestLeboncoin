@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TestLeboncoin</string>
     <string name="album_title">Album %s</string>
+    <string name="unknown_error">Something went wrong</string>
+    <string name="not_found_error">The resource has not been found</string>
+    <string name="retry">Retry</string>
 </resources>
