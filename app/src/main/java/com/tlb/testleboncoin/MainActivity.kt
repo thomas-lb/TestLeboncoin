@@ -2,6 +2,8 @@ package com.tlb.testleboncoin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import com.tlb.testleboncoin.albums.AlbumsFragmentDirections
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 
 class MainActivity: AppCompatActivity() {

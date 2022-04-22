@@ -12,6 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "TestLeboncoin"
 include ':app'
 include ':core'

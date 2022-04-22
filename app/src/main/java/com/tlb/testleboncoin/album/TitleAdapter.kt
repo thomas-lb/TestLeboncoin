@@ -1,18 +1,15 @@
-package com.tlb.testleboncoin.albums
+package com.tlb.testleboncoin.album
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.tlb.core.domain.Album
-import com.tlb.testleboncoin.R
-import com.tlb.testleboncoin.databinding.ItemAlbumBinding
+import com.tlb.core.domain.Title
+import com.tlb.testleboncoin.databinding.ItemTitleBinding
 
-class AlbumsAdapter(
-    private val albumClicked: (Album) -> Unit
-): RecyclerView.Adapter<AlbumsAdapter.ViewHolder>() {
-    var albums: List<Album> = listOf()
+class TitleAdapter: RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
+    var items: List<Title> = listOf()
         set(value) {
             DiffUtil.calculateDiff(
                 DiffCallback(field, value)
@@ -24,39 +21,33 @@ class AlbumsAdapter(
         parent: ViewGroup,
         viewType: Int
     ) = ViewHolder(
-        ItemAlbumBinding.inflate(
+        ItemTitleBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
     )
 
-    override fun onBindViewHolder(
-        holder: ViewHolder,
-        position: Int
-    ) {
-        holder.bind(albums[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(items[position])
     }
 
-    override fun getItemCount() = albums.size
+    override fun getItemCount() = items.size
 
-    inner class ViewHolder(
-        private val binding: ItemAlbumBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: ItemTitleBinding
+    ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Album) = with(binding) {
-            card.setOnClickListener { albumClicked(item) }
-            thumbnail.load(item.url)
-            albumId.text = binding.root.context.getString(
-                R.string.album_title,
-                item.id.toString()
-            )
+        fun bind(item: Title) = binding.apply {
+            index.text = adapterPosition.toString()
+            picture.load(item.thumbnailUrl)
+            name.text = item.title
         }
     }
 
     class DiffCallback(
-        private val oldItems: List<Album>,
-        private val newItems: List<Album>
+        private val oldItems: List<Title>,
+        private val newItems: List<Title>
     ): DiffUtil.Callback() {
         override fun getOldListSize() = oldItems.size
 

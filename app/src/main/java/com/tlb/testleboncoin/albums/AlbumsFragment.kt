@@ -3,9 +3,12 @@ package com.tlb.testleboncoin.albums
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tlb.core.domain.Album
 import com.tlb.core.domain.Result
+import com.tlb.testleboncoin.MainActivity
 import com.tlb.testleboncoin.R
 import com.tlb.testleboncoin.base.BaseFragment
 import com.tlb.testleboncoin.databinding.FragmentAlbumsBinding
@@ -15,7 +18,7 @@ class AlbumsFragment(
 ): BaseFragment<FragmentAlbumsBinding>(
     FragmentAlbumsBinding::inflate
 ) {
-    private val adapter = AlbumsAdapter()
+    private val adapter = AlbumsAdapter(::onAlbumClicked)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,8 +27,8 @@ class AlbumsFragment(
         viewModel.errorData.observe(this, ::onError)
 
         binding.apply {
-            titles.layoutManager = GridLayoutManager(requireContext(), 2)
-            titles.adapter = adapter
+            albums.layoutManager = GridLayoutManager(requireContext(), 2)
+            albums.adapter = adapter
 
             retry.setOnClickListener {
                 viewModel.fetchData()
@@ -33,12 +36,12 @@ class AlbumsFragment(
         }
     }
 
-    private fun onAlbums(albums: List<Album>) {
+    private fun onAlbums(albumList: List<Album>) {
         binding.apply {
             errorGroup.isVisible = false
-            titles.isVisible = true
+            albums.isVisible = true
         }
-        adapter.albums = albums
+        adapter.albums = albumList
     }
 
     private fun onError(error: Result.Error<List<Album>>) {
@@ -50,8 +53,13 @@ class AlbumsFragment(
                 }
             )
             errorGroup.isVisible = true
-            titles.isVisible = false
+            albums.isVisible = false
         }
+    }
 
+    private fun onAlbumClicked(album: Album) {
+        findNavController().navigate(
+            AlbumsFragmentDirections.goToAlbum(album.id)
+        )
     }
 }
