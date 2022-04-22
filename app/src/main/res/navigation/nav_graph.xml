@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/albumsFragment"
         android:name="com.tlb.testleboncoin.albums.AlbumsFragment"
-        android:label="fragment_albums"
+        android:label="@string/albums_page_title"
         tools:layout="@layout/fragment_albums" >
         <action
             android:id="@+id/goToAlbum"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.tlb.testleboncoin.album.AlbumFragment"
-        android:label="AlbumFragment" >
+        android:label="@string/album_page_title" >
         <argument
             android:name="albumId"
             app:argType="integer" />

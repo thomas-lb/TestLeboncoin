@@ -4,4 +4,6 @@
     <string name="unknown_error">Something went wrong</string>
     <string name="not_found_error">The resource has not been found</string>
     <string name="retry">Retry</string>
+    <string name="albums_page_title">Album collection</string>
+    <string name="album_page_title">Album details</string>
 </resources>

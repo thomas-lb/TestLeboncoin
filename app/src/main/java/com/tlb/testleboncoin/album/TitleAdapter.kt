@@ -39,7 +39,7 @@ class TitleAdapter: RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Title) = binding.apply {
-            index.text = adapterPosition.toString()
+            index.text = adapterPosition.plus(1).toString()
             picture.load(item.thumbnailUrl)
             name.text = item.title
         }
