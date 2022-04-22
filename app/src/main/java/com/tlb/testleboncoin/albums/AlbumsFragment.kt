@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tlb.core.domain.Album
 import com.tlb.core.domain.Result
 import com.tlb.core.interactors.AlbumList
@@ -40,6 +41,7 @@ class AlbumsFragment(
                     }
                 }
             }
+            adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
             albums.adapter = adapter
 
             retry.setOnClickListener {

@@ -121,6 +121,7 @@ class AlbumListAdapter(
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
+                adapter.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
                 items.adapter = adapter
             }
         }
