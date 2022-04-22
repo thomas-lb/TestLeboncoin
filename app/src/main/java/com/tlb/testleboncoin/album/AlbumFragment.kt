@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tlb.core.domain.Album
@@ -30,7 +31,6 @@ class AlbumFragment(
         binding.apply {
             titles.layoutManager = LinearLayoutManager(requireContext())
             adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-            titles.adapter = adapter
 
             retry.setOnClickListener { viewModel.fetchData(args.albumId) }
         }
@@ -39,6 +39,10 @@ class AlbumFragment(
     }
 
     private fun onAlbum(album: Album) {
+        binding.titles.adapter = ConcatAdapter(
+            HeaderAdapter(album),
+            adapter
+        )
         adapter.items = album.titles
     }
 
