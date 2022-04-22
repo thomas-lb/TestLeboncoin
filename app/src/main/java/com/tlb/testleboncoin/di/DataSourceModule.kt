@@ -1,7 +1,6 @@
 package com.tlb.testleboncoin.di
 
 import com.tlb.core.data.TitleDataSource
-import com.tlb.testleboncoin.framework.AppDatabase
 import com.tlb.testleboncoin.framework.TitleLocalDataSource
 import com.tlb.testleboncoin.framework.TitleRemoteDataSource
 import org.koin.core.qualifier.named

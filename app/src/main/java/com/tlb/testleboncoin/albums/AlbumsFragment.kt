@@ -15,7 +15,7 @@ import com.tlb.testleboncoin.databinding.FragmentAlbumsBinding
 
 class AlbumsFragment(
     private val viewModel: AlbumsViewModel
-): BaseFragment<FragmentAlbumsBinding>(
+) : BaseFragment<FragmentAlbumsBinding>(
     FragmentAlbumsBinding::inflate
 ) {
     private val adapter = AlbumListAdapter(::onAlbumClicked)
@@ -32,16 +32,17 @@ class AlbumsFragment(
                 requireContext(),
                 2
             ).apply {
-                spanSizeLookup = object: GridLayoutManager.SpanSizeLookup() {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(
                         position: Int
-                    ) = when(position) {
-                        in  0..1 -> 2
+                    ) = when (position) {
+                        in 0..1 -> 2
                         else -> 1
                     }
                 }
             }
-            adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            adapter.stateRestorationPolicy =
+                RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
             albums.adapter = adapter
 
             retry.setOnClickListener {
@@ -61,7 +62,7 @@ class AlbumsFragment(
     private fun onError(error: Result.Error<*>) {
         binding.apply {
             errorLabel.setText(
-                when(error) {
+                when (error) {
                     is Result.Error.NotFound -> R.string.not_found_error
                     is Result.Error.Unknown -> R.string.not_found_error
                 }

@@ -15,7 +15,7 @@ import com.tlb.testleboncoin.databinding.ItemHorizontalScrollBinding
 
 class AlbumListAdapter(
     private val albumClicked: (Album) -> Unit
-): RecyclerView.Adapter<AlbumListAdapter.ViewHolder<out ViewBinding>>() {
+) : RecyclerView.Adapter<AlbumListAdapter.ViewHolder<out ViewBinding>>() {
 
     private var items: List<ItemType> = listOf()
         set(value) {
@@ -56,7 +56,7 @@ class AlbumListAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ) = when(viewType) {
+    ) = when (viewType) {
         R.layout.item_horizontal_scroll -> HorizontalScrollViewHolder(
             ItemHorizontalScrollBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -77,7 +77,7 @@ class AlbumListAdapter(
         holder: ViewHolder<*>,
         position: Int
     ) {
-        when(holder) {
+        when (holder) {
             is HorizontalScrollViewHolder -> {
                 val item = items[position] as ItemType.ItemHorizontalScroll
                 holder.bind(item.id, item.items)
@@ -91,13 +91,13 @@ class AlbumListAdapter(
 
     override fun getItemCount() = items.size
 
-    abstract class ViewHolder<VB: ViewBinding>(
+    abstract class ViewHolder<VB : ViewBinding>(
         protected val binding: VB
     ) : RecyclerView.ViewHolder(binding.root)
 
     inner class AlbumViewHolder(
         binding: ItemAlbumGridBinding
-    ): ViewHolder<ItemAlbumGridBinding>(binding) {
+    ) : ViewHolder<ItemAlbumGridBinding>(binding) {
 
         fun bind(item: Album) = with(binding) {
             card.setOnClickListener { albumClicked(item) }
@@ -111,7 +111,7 @@ class AlbumListAdapter(
 
     inner class HorizontalScrollViewHolder(
         binding: ItemHorizontalScrollBinding
-    ): ViewHolder<ItemHorizontalScrollBinding>(binding) {
+    ) : ViewHolder<ItemHorizontalScrollBinding>(binding) {
         private val adapter = SimpleAlbumAdapter(albumClicked)
 
         init {
@@ -138,7 +138,7 @@ class AlbumListAdapter(
     class DiffCallback(
         private val oldItems: List<ItemType>,
         private val newItems: List<ItemType>
-    ): DiffUtil.Callback() {
+    ) : DiffUtil.Callback() {
         override fun getOldListSize() = oldItems.size
 
         override fun getNewListSize() = newItems.size
@@ -161,11 +161,12 @@ class AlbumListAdapter(
         class ItemHorizontalScroll(
             titleResId: Int,
             val items: List<Album>
-        ): ItemType(
+        ) : ItemType(
             titleResId,
             R.layout.item_horizontal_scroll
         )
-        class ItemAlbum(val item: Album): ItemType(
+
+        class ItemAlbum(val item: Album) : ItemType(
             item.id,
             R.layout.item_album_grid
         )

@@ -9,7 +9,6 @@ import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldHaveSize
-import org.amshove.kluent.shouldNotBeIn
 import org.junit.Test
 
 class GetAlbumTest {

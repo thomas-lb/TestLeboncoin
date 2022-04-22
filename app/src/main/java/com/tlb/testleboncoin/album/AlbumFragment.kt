@@ -15,7 +15,7 @@ import com.tlb.testleboncoin.databinding.FragmentAlbumBinding
 
 class AlbumFragment(
     private val viewModel: AlbumViewModel
-): BaseFragment<FragmentAlbumBinding>(
+) : BaseFragment<FragmentAlbumBinding>(
     FragmentAlbumBinding::inflate
 ) {
     private val adapter = TitleAdapter()
@@ -30,7 +30,8 @@ class AlbumFragment(
 
         binding.apply {
             titles.layoutManager = LinearLayoutManager(requireContext())
-            adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            adapter.stateRestorationPolicy =
+                RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
             retry.setOnClickListener { viewModel.fetchData(args.albumId) }
         }
@@ -49,7 +50,7 @@ class AlbumFragment(
     private fun onError(error: Result.Error<*>) {
         binding.apply {
             errorLabel.setText(
-                when(error) {
+                when (error) {
                     is Result.Error.NotFound -> R.string.not_found_error
                     is Result.Error.Unknown -> R.string.not_found_error
                 }

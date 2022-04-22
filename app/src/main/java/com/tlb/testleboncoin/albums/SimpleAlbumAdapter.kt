@@ -11,7 +11,7 @@ import com.tlb.testleboncoin.databinding.ItemAlbumSimpleBinding
 
 class SimpleAlbumAdapter(
     private val albumClicked: (Album) -> Unit
-): RecyclerView.Adapter<SimpleAlbumAdapter.SimpleAlbumViewHolder>() {
+) : RecyclerView.Adapter<SimpleAlbumAdapter.SimpleAlbumViewHolder>() {
     var items = listOf<Album>()
         set(value) {
             DiffUtil.calculateDiff(
@@ -39,7 +39,7 @@ class SimpleAlbumAdapter(
 
     inner class SimpleAlbumViewHolder(
         private val binding: ItemAlbumSimpleBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(album: Album) = with(binding) {
             card.setOnClickListener { albumClicked(album) }
@@ -54,7 +54,7 @@ class SimpleAlbumAdapter(
     inner class SimpleAlbumDiffCallback(
         private val oldItems: List<Album>,
         private val newItems: List<Album>
-    ): DiffUtil.Callback() {
+    ) : DiffUtil.Callback() {
         override fun getOldListSize() = oldItems.size
 
         override fun getNewListSize() = newItems.size

@@ -9,7 +9,7 @@ class GetAlbum(
 ) {
     suspend operator fun invoke(
         id: Int
-    ) = when(val result = titleRepository.getTitles()) {
+    ) = when (val result = titleRepository.getTitles()) {
         is Result.Success -> {
             val entries = result.data
                 .groupBy { it.albumId }

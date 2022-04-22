@@ -6,7 +6,7 @@ import com.tlb.core.domain.Title
 class TitleLocalDataSource(
     private val titleDao: TitleDao,
     private val titleMapper: TitleMapper
-): TitleDataSource {
+) : TitleDataSource {
     override suspend fun getTitles() = titleDao.getTitles().map { titleMapper.toTitle(it) }
 
     override suspend fun updateTitles(titles: List<Title>) {

@@ -10,7 +10,7 @@ import com.tlb.testleboncoin.databinding.ItemAlbumHeaderBinding
 
 class HeaderAdapter(
     val album: Album
-): RecyclerView.Adapter<HeaderAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<HeaderAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,7 +31,7 @@ class HeaderAdapter(
 
     class ViewHolder(
         private val binding: ItemAlbumHeaderBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(album: Album) = with(binding) {
             picture.load(album.url)

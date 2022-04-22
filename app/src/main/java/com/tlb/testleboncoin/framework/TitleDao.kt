@@ -1,11 +1,8 @@
 package com.tlb.testleboncoin.framework
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.tlb.core.data.TitleDataSource
-import com.tlb.core.domain.Title
 
 @Dao
 interface TitleDao {

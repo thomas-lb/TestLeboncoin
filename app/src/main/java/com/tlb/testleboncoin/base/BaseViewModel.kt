@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tlb.core.domain.Result
 
-abstract class BaseViewModel: ViewModel() {
+abstract class BaseViewModel : ViewModel() {
     protected val _errorData = MutableLiveData<Result.Error<*>>()
     val errorData = _errorData as LiveData<Result.Error<*>>
 

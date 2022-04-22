@@ -2,15 +2,13 @@ package com.tlb.core.data
 
 import com.tlb.core.domain.Result
 import com.tlb.core.domain.Title
-import io.mockk.*
+import io.mockk.coEvery
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldHaveSize
-
 import org.junit.Test
-import java.lang.Exception
-import kotlin.math.exp
 
 class TitleRepositoryTest {
     private val remoteSource: TitleDataSource = mockk()

@@ -2,7 +2,6 @@ package com.tlb.testleboncoin.framework
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.tlb.core.domain.Title
 
 @Entity(tableName = "TITLES")
 data class TitleEntity(

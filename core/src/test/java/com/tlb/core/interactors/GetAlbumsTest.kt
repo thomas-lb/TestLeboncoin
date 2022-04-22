@@ -1,26 +1,20 @@
 package com.tlb.core.interactors
 
 import com.tlb.core.data.TitleRepository
-import com.tlb.core.domain.Album
 import com.tlb.core.domain.Result
 import com.tlb.core.domain.Title
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldHaveSize
-import org.junit.Assert.*
-
 import org.junit.Test
-import java.lang.Exception
 
 class GetAlbumsTest {
 
     private val titleRepository: TitleRepository = mockk()
     private val getAlbums = GetAlbums(titleRepository)
-
 
 
     @Test

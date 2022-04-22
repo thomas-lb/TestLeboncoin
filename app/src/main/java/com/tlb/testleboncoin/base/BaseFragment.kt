@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.viewbinding.ViewBinding
-import com.tlb.testleboncoin.databinding.FragmentAlbumsBinding
 
-abstract class BaseFragment<VB: ViewBinding>(
+abstract class BaseFragment<VB : ViewBinding>(
     private val inflate: (LayoutInflater, ViewGroup?, Boolean) -> VB
-): AppCompatDialogFragment() {
+) : AppCompatDialogFragment() {
     private var _binding: VB? = null
     protected val binding: VB
         get() = _binding!!

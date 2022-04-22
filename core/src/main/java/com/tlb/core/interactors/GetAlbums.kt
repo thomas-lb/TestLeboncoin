@@ -5,7 +5,7 @@ import com.tlb.core.domain.Album
 import com.tlb.core.domain.Result
 
 class GetAlbums(private val titleRepository: TitleRepository) {
-    suspend operator fun invoke() = when(val result = titleRepository.getTitles()) {
+    suspend operator fun invoke() = when (val result = titleRepository.getTitles()) {
         is Result.Success -> {
             val albums = result.data.groupBy { it.albumId }
                 .map { (albumId, titles) ->

@@ -2,7 +2,6 @@ package com.tlb.testleboncoin.album
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tlb.core.domain.Album
 import com.tlb.core.domain.Result
@@ -12,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class AlbumViewModel(
     private val getAlbum: GetAlbum
-): BaseViewModel() {
+) : BaseViewModel() {
     var id = 0
         set(value) {
             field = value
@@ -24,7 +23,7 @@ class AlbumViewModel(
 
     fun fetchData(id: Int) = viewModelScope.launch {
         _loadingData.postValue(true)
-        when(val result = getAlbum(id)) {
+        when (val result = getAlbum(id)) {
             is Result.Success -> _albumData.postValue(result.data)
             is Result.Error -> _errorData.postValue(result)
         }

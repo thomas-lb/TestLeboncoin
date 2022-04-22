@@ -8,7 +8,7 @@ import coil.load
 import com.tlb.core.domain.Title
 import com.tlb.testleboncoin.databinding.ItemTitleBinding
 
-class TitleAdapter: RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
+class TitleAdapter : RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
     var items: List<Title> = listOf()
         set(value) {
             DiffUtil.calculateDiff(
@@ -36,7 +36,7 @@ class TitleAdapter: RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
 
     class ViewHolder(
         private val binding: ItemTitleBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Title) = binding.apply {
             index.text = adapterPosition.plus(1).toString()
@@ -48,7 +48,7 @@ class TitleAdapter: RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
     class DiffCallback(
         private val oldItems: List<Title>,
         private val newItems: List<Title>
-    ): DiffUtil.Callback() {
+    ) : DiffUtil.Callback() {
         override fun getOldListSize() = oldItems.size
 
         override fun getNewListSize() = newItems.size
