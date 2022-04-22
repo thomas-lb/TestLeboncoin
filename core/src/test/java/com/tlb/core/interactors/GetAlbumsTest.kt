@@ -48,12 +48,19 @@ class GetAlbumsTest {
     }
 
     @Test
-    fun `titleRepository fails`(): Unit = runBlocking {
-        coEvery { titleRepository.getTitles() } returns Result.Error(exception)
+    fun `titleRepository fails with NotFound`(): Unit = runBlocking {
+        coEvery { titleRepository.getTitles() } returns Result.Error.NotFound()
 
         val result = getAlbums()
-        result shouldBeInstanceOf Result.Error::class.java
-        (result as Result.Error).throwable shouldBe exception
+        result shouldBeInstanceOf Result.Error.NotFound::class.java
+    }
+
+    @Test
+    fun `titleRepository fails with Unknown`(): Unit = runBlocking {
+        coEvery { titleRepository.getTitles() } returns Result.Error.Unknown()
+
+        val result = getAlbums()
+        result shouldBeInstanceOf Result.Error.Unknown::class.java
     }
 
 }

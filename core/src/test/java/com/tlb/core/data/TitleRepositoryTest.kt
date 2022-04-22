@@ -44,13 +44,11 @@ class TitleRepositoryTest {
 
     @Test
     fun `remoteSource fails and localSource returns an empty list`(): Unit = runBlocking {
-        val expected = listOf<Title>()
         coEvery { remoteSource.getTitles() } throws exception
         coEvery { localSource.getTitles() } returns listOf()
 
         val result = titleRepository.getTitles()
-        result shouldBeInstanceOf Result.Success::class.java
-        (result as Result.Success).data shouldHaveSize expected.size
+        result shouldBeInstanceOf Result.Error.NotFound::class.java
     }
 
     @Test
@@ -71,7 +69,6 @@ class TitleRepositoryTest {
         coEvery { localSource.getTitles() } throws exception
 
         val result = titleRepository.getTitles()
-        result shouldBeInstanceOf Result.Error::class.java
-        (result as Result.Error).throwable shouldBe exception
+        result shouldBeInstanceOf Result.Error.Unknown::class.java
     }
 }
