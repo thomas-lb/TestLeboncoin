@@ -28,6 +28,8 @@ class AlbumFragment(
         binding.apply {
             titles.layoutManager = LinearLayoutManager(requireContext())
             titles.adapter = adapter
+
+            retry.setOnClickListener { viewModel.fetchData(args.albumId) }
         }
 
         viewModel.id = args.albumId
