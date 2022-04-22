@@ -24,6 +24,7 @@ class AlbumFragment(
 
         viewModel.albumData.observe(this, ::onAlbum)
         viewModel.errorData.observe(this, ::onError)
+        viewModel.loadingData.observe(this, ::onLoading)
 
         binding.apply {
             titles.layoutManager = LinearLayoutManager(requireContext())
@@ -39,7 +40,7 @@ class AlbumFragment(
         adapter.items = album.titles
     }
 
-    private fun onError(error: Result.Error<Album>) {
+    private fun onError(error: Result.Error<*>) {
         binding.apply {
             errorLabel.setText(
                 when(error) {
@@ -50,5 +51,9 @@ class AlbumFragment(
             errorGroup.isVisible = true
             titles.isVisible = false
         }
+    }
+
+    private fun onLoading(loading: Boolean) {
+        binding.progress.isVisible = loading
     }
 }
