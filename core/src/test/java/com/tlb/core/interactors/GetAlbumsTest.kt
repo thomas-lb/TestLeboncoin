@@ -32,8 +32,8 @@ class GetAlbumsTest {
 
     @Test
     fun `titleRepository returns an empty list`(): Unit = runBlocking {
-        val expected = listOf<Title>()
-        coEvery { titleRepository.getTitles() } returns Result.Success(expected)
+        val expected = AlbumList()
+        coEvery { titleRepository.getTitles() } returns Result.Success(listOf())
         getAlbums() shouldBeInstanceOf Result.Success::class.java
         getAlbums() shouldBeEqualTo Result.Success(expected)
     }
@@ -44,7 +44,7 @@ class GetAlbumsTest {
 
         val result = getAlbums()
         result shouldBeInstanceOf Result.Success::class.java
-        (result as Result.Success).data shouldHaveSize 2
+        (result as Result.Success).data.albums shouldHaveSize 2
     }
 
     @Test

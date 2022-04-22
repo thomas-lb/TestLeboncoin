@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.tlb.core.domain.Album
 import com.tlb.testleboncoin.R
-import com.tlb.testleboncoin.databinding.ItemAlbumBinding
+import com.tlb.testleboncoin.databinding.ItemAlbumSimpleBinding
 
-class AlbumsAdapter(
+class SimpleAlbumAdapter(
     private val albumClicked: (Album) -> Unit
-): RecyclerView.Adapter<AlbumsAdapter.ViewHolder>() {
-    var albums: List<Album> = listOf()
+): RecyclerView.Adapter<SimpleAlbumAdapter.SimpleAlbumViewHolder>() {
+    var items = listOf<Album>()
         set(value) {
             DiffUtil.calculateDiff(
-                DiffCallback(field, value)
+                SimpleAlbumDiffCallback(field, value)
             ).dispatchUpdatesTo(this)
             field = value
         }
@@ -23,38 +23,35 @@ class AlbumsAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ) = ViewHolder(
-        ItemAlbumBinding.inflate(
+    ) = SimpleAlbumViewHolder(
+        ItemAlbumSimpleBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
     )
 
-    override fun onBindViewHolder(
-        holder: ViewHolder,
-        position: Int
-    ) {
-        holder.bind(albums[position])
+    override fun onBindViewHolder(holder: SimpleAlbumViewHolder, position: Int) {
+        holder.bind(items[position])
     }
 
-    override fun getItemCount() = albums.size
+    override fun getItemCount() = items.size
 
-    inner class ViewHolder(
-        private val binding: ItemAlbumBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    inner class SimpleAlbumViewHolder(
+        private val binding: ItemAlbumSimpleBinding
+    ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Album) = with(binding) {
-            card.setOnClickListener { albumClicked(item) }
-            thumbnail.load(item.url)
+        fun bind(album: Album) = with(binding) {
+            card.setOnClickListener { albumClicked(album) }
+            thumbnail.load(album.url)
             albumId.text = binding.root.context.getString(
                 R.string.album_title,
-                item.id.toString()
+                album.id.toString()
             )
         }
     }
 
-    class DiffCallback(
+    inner class SimpleAlbumDiffCallback(
         private val oldItems: List<Album>,
         private val newItems: List<Album>
     ): DiffUtil.Callback() {

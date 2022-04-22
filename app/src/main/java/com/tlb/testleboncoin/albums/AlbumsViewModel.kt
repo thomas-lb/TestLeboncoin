@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tlb.core.domain.Album
 import com.tlb.core.domain.Result
+import com.tlb.core.interactors.AlbumList
 import com.tlb.core.interactors.GetAlbums
 import com.tlb.testleboncoin.base.BaseViewModel
 import kotlinx.coroutines.launch
@@ -13,8 +14,8 @@ import kotlinx.coroutines.launch
 class AlbumsViewModel(
     private val getAlbums: GetAlbums
 ): BaseViewModel() {
-    private val _albumsData = MutableLiveData<List<Album>>()
-    val albumsData = _albumsData as LiveData<List<Album>>
+    private val _albumsData = MutableLiveData<AlbumList>()
+    val albumsData = _albumsData as LiveData<AlbumList>
 
     init {
         fetchData()

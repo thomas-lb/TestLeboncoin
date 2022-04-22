@@ -6,4 +6,6 @@
     <string name="retry">Retry</string>
     <string name="albums_page_title">Album collection</string>
     <string name="album_page_title">Album details</string>
+    <string name="recommended_section_title">Recommended for you</string>
+    <string name="favorites_section_title">Your favorites</string>
 </resources>

@@ -6,8 +6,8 @@ import com.tlb.core.domain.Result
 
 class GetAlbums(private val titleRepository: TitleRepository) {
     suspend operator fun invoke() = when(val result = titleRepository.getTitles()) {
-        is Result.Success -> Result.Success(
-            result.data.groupBy { it.albumId }
+        is Result.Success -> {
+            val albums = result.data.groupBy { it.albumId }
                 .map { (albumId, titles) ->
                     val first = titles.firstOrNull() ?: return@map null
                     Album(
@@ -17,8 +17,22 @@ class GetAlbums(private val titleRepository: TitleRepository) {
                         titles
                     )
                 }.filterNotNull()
-        )
+
+            Result.Success(
+                AlbumList(
+                    favorites = if (albums.size > 3) albums.subList(0, 3) else listOf(),
+                    recommended = if (albums.size > 6) albums.subList(3, 6) else listOf(),
+                    albums = albums
+                )
+            )
+        }
         is Result.Error.NotFound -> Result.Error.NotFound()
         is Result.Error.Unknown -> Result.Error.Unknown()
     }
 }
+
+data class AlbumList(
+    val favorites: List<Album> = listOf(),
+    val recommended: List<Album> = listOf(),
+    val albums: List<Album> = listOf()
+)

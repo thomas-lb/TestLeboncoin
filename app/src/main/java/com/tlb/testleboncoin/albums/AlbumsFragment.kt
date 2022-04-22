@@ -3,12 +3,11 @@ package com.tlb.testleboncoin.albums
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tlb.core.domain.Album
 import com.tlb.core.domain.Result
-import com.tlb.testleboncoin.MainActivity
+import com.tlb.core.interactors.AlbumList
 import com.tlb.testleboncoin.R
 import com.tlb.testleboncoin.base.BaseFragment
 import com.tlb.testleboncoin.databinding.FragmentAlbumsBinding
@@ -18,7 +17,7 @@ class AlbumsFragment(
 ): BaseFragment<FragmentAlbumsBinding>(
     FragmentAlbumsBinding::inflate
 ) {
-    private val adapter = AlbumsAdapter(::onAlbumClicked)
+    private val adapter = AlbumListAdapter(::onAlbumClicked)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +27,19 @@ class AlbumsFragment(
         viewModel.loadingData.observe(this, ::onLoading)
 
         binding.apply {
-            albums.layoutManager = GridLayoutManager(requireContext(), 2)
+            albums.layoutManager = GridLayoutManager(
+                requireContext(),
+                2
+            ).apply {
+                spanSizeLookup = object: GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(
+                        position: Int
+                    ) = when(position) {
+                        in  0..1 -> 2
+                        else -> 1
+                    }
+                }
+            }
             albums.adapter = adapter
 
             retry.setOnClickListener {
@@ -37,12 +48,12 @@ class AlbumsFragment(
         }
     }
 
-    private fun onAlbums(albumList: List<Album>) {
+    private fun onAlbums(albumList: AlbumList) {
         binding.apply {
             errorGroup.isVisible = false
             albums.isVisible = true
         }
-        adapter.albums = albumList
+        adapter.albumList = albumList
     }
 
     private fun onError(error: Result.Error<*>) {
