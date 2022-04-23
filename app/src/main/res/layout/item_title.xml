@@ -32,6 +32,7 @@
             android:id="@+id/picture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/title_content_description"
             tools:srcCompat="@tools:sample/avatars" />
     </com.google.android.material.card.MaterialCardView>
 

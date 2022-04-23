@@ -8,4 +8,7 @@
     <string name="album_page_title">Album details</string>
     <string name="recommended_section_title">Recommended for you</string>
     <string name="favorites_section_title">Your favorites</string>
+    <string name="title_content_description">Picture associated with a title</string>
+    <string name="album_content_description">Picture associated with a album</string>
+    <string name="error_content_description">An error happened</string>
 </resources>
