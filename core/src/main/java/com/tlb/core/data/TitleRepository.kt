@@ -2,14 +2,16 @@ package com.tlb.core.data
 
 import com.tlb.core.domain.Result
 import com.tlb.core.domain.Title
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class TitleRepository(
     private val remoteSource: TitleDataSource,
     private val localSource: TitleDataSource
 ) {
 
-    suspend fun getTitles(): Result<List<Title>> {
-        return try {
+    suspend fun getTitles() = withContext(Dispatchers.IO) {
+        try {
             val titles = remoteSource.getTitles()
             localSource.removeTitles()
             localSource.updateTitles(titles)
