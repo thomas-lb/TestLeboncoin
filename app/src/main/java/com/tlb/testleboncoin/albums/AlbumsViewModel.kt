@@ -21,8 +21,7 @@ class AlbumsViewModel(
 
     fun fetchData() = viewModelScope.launch {
         _loadingData.postValue(true)
-        val result = getAlbums()
-        when (result) {
+        when (val result = getAlbums()) {
             is Result.Success -> _albumsData.postValue(result.data)
             is Result.Error -> _errorData.postValue(result)
         }
