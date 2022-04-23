@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:textSize="22sp"
+        android:textColor="?colorOnBackground"
         app:fontFamily="@font/montserrat_bold"
         tools:text="Title" />
 
