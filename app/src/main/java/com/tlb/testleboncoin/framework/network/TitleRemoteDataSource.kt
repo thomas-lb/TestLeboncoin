@@ -1,4 +1,4 @@
-package com.tlb.testleboncoin.framework
+package com.tlb.testleboncoin.framework.network
 
 import com.tlb.core.data.TitleDataSource
 import com.tlb.core.domain.Title

@@ -1,4 +1,4 @@
-package com.tlb.testleboncoin.framework
+package com.tlb.testleboncoin.framework.db
 
 import androidx.room.Dao
 import androidx.room.Insert

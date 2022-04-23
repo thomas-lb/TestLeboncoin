@@ -1,4 +1,4 @@
-package com.tlb.testleboncoin.framework
+package com.tlb.testleboncoin.framework.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

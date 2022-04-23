@@ -1,8 +1,8 @@
 package com.tlb.testleboncoin.di
 
 import com.tlb.core.data.TitleDataSource
-import com.tlb.testleboncoin.framework.TitleLocalDataSource
-import com.tlb.testleboncoin.framework.TitleRemoteDataSource
+import com.tlb.testleboncoin.framework.db.TitleLocalDataSource
+import com.tlb.testleboncoin.framework.network.TitleRemoteDataSource
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
