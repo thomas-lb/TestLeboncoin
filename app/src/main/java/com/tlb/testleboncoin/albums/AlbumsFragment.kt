@@ -27,16 +27,20 @@ class AlbumsFragment(
         viewModel.errorData.observe(this, ::onError)
         viewModel.loadingData.observe(this, ::onLoading)
 
+        val spanCount =
+            if (resources.getBoolean(R.bool.is_tablet)) {
+                4
+            } else 2
         binding.apply {
             albums.layoutManager = GridLayoutManager(
                 requireContext(),
-                2
+                spanCount
             ).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(
                         position: Int
                     ) = when (position) {
-                        in 0..1 -> 2
+                        in 0..1 -> spanCount
                         else -> 1
                     }
                 }
