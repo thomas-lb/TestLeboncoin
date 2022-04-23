@@ -22,11 +22,11 @@ class AlbumViewModel(
     val albumData = _albumData as LiveData<Album>
 
     fun fetchData(id: Int) = viewModelScope.launch {
-        _loadingData.postValue(true)
+        _loadingData.value = true
         when (val result = getAlbum(id)) {
-            is Result.Success -> _albumData.postValue(result.data)
-            is Result.Error -> _errorData.postValue(result)
+            is Result.Success -> result.data.let(_albumData::setValue)
+            is Result.Error -> _errorData.value = result
         }
-        _loadingData.postValue(false)
+        _loadingData.value = false
     }
 }
