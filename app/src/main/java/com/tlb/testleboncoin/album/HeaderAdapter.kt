@@ -10,12 +10,12 @@ import com.tlb.testleboncoin.databinding.ItemAlbumHeaderBinding
 
 class HeaderAdapter(
     val album: Album
-) : RecyclerView.Adapter<HeaderAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<HeaderViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ) = ViewHolder(
+    ) = HeaderViewHolder(
         ItemAlbumHeaderBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -23,22 +23,9 @@ class HeaderAdapter(
         )
     )
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HeaderViewHolder, position: Int) {
         holder.bind(album)
     }
 
     override fun getItemCount() = 1
-
-    class ViewHolder(
-        private val binding: ItemAlbumHeaderBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(album: Album) = with(binding) {
-            picture.load(album.url)
-            name.text = root.context.getString(
-                R.string.album_title,
-                album.id.toString()
-            )
-        }
-    }
 }

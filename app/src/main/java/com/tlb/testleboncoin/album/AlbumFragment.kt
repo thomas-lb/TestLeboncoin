@@ -18,7 +18,7 @@ class AlbumFragment(
 ) : BaseFragment<FragmentAlbumBinding>(
     FragmentAlbumBinding::inflate
 ) {
-    private val adapter = TitleAdapter()
+    private val adapter = TitlesAdapter()
     private val args by navArgs<AlbumFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

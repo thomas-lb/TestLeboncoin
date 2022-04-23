@@ -8,7 +8,7 @@ import coil.load
 import com.tlb.core.domain.Title
 import com.tlb.testleboncoin.databinding.ItemTitleBinding
 
-class TitleAdapter : RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
+class TitlesAdapter : RecyclerView.Adapter<TitlesViewHolder>() {
     var items: List<Title> = listOf()
         set(value) {
             DiffUtil.calculateDiff(
@@ -20,7 +20,7 @@ class TitleAdapter : RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ) = ViewHolder(
+    ) = TitlesViewHolder(
         ItemTitleBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -28,22 +28,11 @@ class TitleAdapter : RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
         )
     )
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+    override fun onBindViewHolder(holder: TitlesViewHolder, position: Int) {
+        holder.bind(position, items[position])
     }
 
     override fun getItemCount() = items.size
-
-    class ViewHolder(
-        private val binding: ItemTitleBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(item: Title) = binding.apply {
-            index.text = adapterPosition.plus(1).toString()
-            picture.load(item.thumbnailUrl)
-            name.text = item.title
-        }
-    }
 
     class DiffCallback(
         private val oldItems: List<Title>,

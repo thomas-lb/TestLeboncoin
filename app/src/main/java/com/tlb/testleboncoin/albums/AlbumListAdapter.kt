@@ -15,7 +15,7 @@ import com.tlb.testleboncoin.databinding.ItemHorizontalScrollBinding
 
 class AlbumListAdapter(
     private val albumClicked: (Album) -> Unit
-) : RecyclerView.Adapter<AlbumListAdapter.ViewHolder<out ViewBinding>>() {
+) : RecyclerView.Adapter<AlbumListViewHolder<out ViewBinding>>() {
 
     private var items: List<ItemType> = listOf()
         set(value) {
@@ -57,14 +57,15 @@ class AlbumListAdapter(
         parent: ViewGroup,
         viewType: Int
     ) = when (viewType) {
-        R.layout.item_horizontal_scroll -> HorizontalScrollViewHolder(
+        R.layout.item_horizontal_scroll -> AlbumListViewHolder.HorizontalScrollViewHolder(
             ItemHorizontalScrollBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            albumClicked
         )
-        else -> AlbumViewHolder(
+        else -> AlbumListViewHolder.AlbumViewHolder(
             ItemAlbumGridBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -74,66 +75,22 @@ class AlbumListAdapter(
     }
 
     override fun onBindViewHolder(
-        holder: ViewHolder<*>,
+        holder: AlbumListViewHolder<*>,
         position: Int
     ) {
         when (holder) {
-            is HorizontalScrollViewHolder -> {
+            is AlbumListViewHolder.HorizontalScrollViewHolder -> {
                 val item = items[position] as ItemType.ItemHorizontalScroll
                 holder.bind(item.id, item.items)
             }
-            is AlbumViewHolder -> {
+            is AlbumListViewHolder.AlbumViewHolder -> {
                 val item = items[position] as ItemType.ItemAlbum
-                holder.bind(item.item)
+                holder.bind(item.item, albumClicked)
             }
         }
     }
 
     override fun getItemCount() = items.size
-
-    abstract class ViewHolder<VB : ViewBinding>(
-        protected val binding: VB
-    ) : RecyclerView.ViewHolder(binding.root)
-
-    inner class AlbumViewHolder(
-        binding: ItemAlbumGridBinding
-    ) : ViewHolder<ItemAlbumGridBinding>(binding) {
-
-        fun bind(item: Album) = with(binding) {
-            card.setOnClickListener { albumClicked(item) }
-            thumbnail.load(item.url)
-            albumId.text = binding.root.context.getString(
-                R.string.album_title,
-                item.id.toString()
-            )
-        }
-    }
-
-    inner class HorizontalScrollViewHolder(
-        binding: ItemHorizontalScrollBinding
-    ) : ViewHolder<ItemHorizontalScrollBinding>(binding) {
-        private val adapter = SimpleAlbumAdapter(albumClicked)
-
-        init {
-            with(binding) {
-                items.layoutManager = LinearLayoutManager(
-                    itemView.context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-                adapter.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
-                items.adapter = adapter
-            }
-        }
-
-        fun bind(
-            titleResId: Int,
-            albums: List<Album>
-        ) = with(binding) {
-            title.setText(titleResId)
-            adapter.items = albums
-        }
-    }
 
     class DiffCallback(
         private val oldItems: List<ItemType>,
