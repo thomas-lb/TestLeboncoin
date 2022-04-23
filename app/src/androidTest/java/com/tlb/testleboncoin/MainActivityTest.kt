@@ -5,11 +5,10 @@ import androidx.test.filters.LargeTest
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import com.tlb.testleboncoin.screens.AlbumScreen
 import com.tlb.testleboncoin.screens.AlbumsScreen
-import org.junit.Assert.*
 import org.junit.Test
 
 @LargeTest
-class MainActivityTest: TestCase() {
+class MainActivityTest : TestCase() {
 
     @Test
     fun navigate() {

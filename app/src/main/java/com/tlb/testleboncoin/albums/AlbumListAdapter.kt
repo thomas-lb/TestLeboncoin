@@ -3,10 +3,8 @@ package com.tlb.testleboncoin.albums
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import coil.load
 import com.tlb.core.domain.Album
 import com.tlb.core.interactors.AlbumList
 import com.tlb.testleboncoin.R

@@ -8,7 +8,7 @@ import io.github.kakaocup.kakao.screen.Screen
 import io.github.kakaocup.kakao.text.KTextView
 import org.hamcrest.Matcher
 
-object AlbumsScreen: Screen<AlbumsScreen>() {
+object AlbumsScreen : Screen<AlbumsScreen>() {
     val recyclerView = KRecyclerView(
         builder = { withId(R.id.albums) },
         itemTypeBuilder = { itemType(AlbumsScreen::Item) }

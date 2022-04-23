@@ -2,7 +2,6 @@ package com.tlb.testleboncoin.albums
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.tlb.core.domain.Album
 import com.tlb.core.domain.Result
 import com.tlb.core.interactors.AlbumList
 import com.tlb.core.interactors.GetAlbums
@@ -11,13 +10,9 @@ import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.Assert.*
-
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.util.*
 
 @ExperimentalCoroutinesApi
 class AlbumsViewModelTest {
@@ -71,30 +66,32 @@ class AlbumsViewModelTest {
     }
 
     @Test
-    fun `Try to fetch albums but get NotFound error`() = testCoroutineRule.testDispatcher.runBlockingTest {
-        coEvery { getAlbums() } returns notFoundResult
+    fun `Try to fetch albums but get NotFound error`() =
+        testCoroutineRule.testDispatcher.runBlockingTest {
+            coEvery { getAlbums() } returns notFoundResult
 
-        val albumsViewModel = getFreshViewModel()
-        albumsViewModel.fetchData()
+            val albumsViewModel = getFreshViewModel()
+            albumsViewModel.fetchData()
 
-        albumsViewModel.albumsData.value shouldBeEqualTo null
-        albumsViewModel.errorData.value shouldBeEqualTo notFoundResult
+            albumsViewModel.albumsData.value shouldBeEqualTo null
+            albumsViewModel.errorData.value shouldBeEqualTo notFoundResult
 
-        removeObservers(albumsViewModel)
-    }
+            removeObservers(albumsViewModel)
+        }
 
     @Test
-    fun `Try to fetch albums but get Unknown error`() = testCoroutineRule.testDispatcher.runBlockingTest {
-        coEvery { getAlbums() } returns unknownResult
+    fun `Try to fetch albums but get Unknown error`() =
+        testCoroutineRule.testDispatcher.runBlockingTest {
+            coEvery { getAlbums() } returns unknownResult
 
-        val albumsViewModel = getFreshViewModel()
-        albumsViewModel.fetchData()
+            val albumsViewModel = getFreshViewModel()
+            albumsViewModel.fetchData()
 
-        albumsViewModel.albumsData.value shouldBeEqualTo null
-        albumsViewModel.errorData.value shouldBeEqualTo unknownResult
+            albumsViewModel.albumsData.value shouldBeEqualTo null
+            albumsViewModel.errorData.value shouldBeEqualTo unknownResult
 
-        removeObservers(albumsViewModel)
-    }
+            removeObservers(albumsViewModel)
+        }
 
     private fun getFreshViewModel() = AlbumsViewModel(getAlbums).apply {
         albumsData.observeForever(albumsObserver)
