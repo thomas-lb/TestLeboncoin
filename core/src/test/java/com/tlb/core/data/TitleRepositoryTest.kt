@@ -1,12 +1,11 @@
 package com.tlb.core.data
 
+import com.tlb.core.CoroutinesTestRule
 import com.tlb.core.domain.Result
 import com.tlb.core.domain.Title
-import com.tlb.core.CoroutinesTestRule
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBe

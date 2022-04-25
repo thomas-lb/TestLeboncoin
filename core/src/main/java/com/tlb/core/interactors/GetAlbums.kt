@@ -3,6 +3,7 @@ package com.tlb.core.interactors
 import com.tlb.core.data.TitleRepository
 import com.tlb.core.domain.Album
 import com.tlb.core.domain.Result
+import com.tlb.core.extensions.map
 
 class GetAlbums(private val titleRepository: TitleRepository) {
     suspend operator fun invoke() = when (val result = titleRepository.getTitles()) {
@@ -26,8 +27,7 @@ class GetAlbums(private val titleRepository: TitleRepository) {
                 )
             )
         }
-        is Result.Error.NotFound -> Result.Error.NotFound()
-        is Result.Error.Unknown -> Result.Error.Unknown()
+        is Result.Error -> result.map()
     }
 }
 
