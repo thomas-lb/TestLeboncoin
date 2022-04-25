@@ -10,7 +10,7 @@ import com.tlb.testleboncoin.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class AlbumViewModel(
-    private val getAlbum: GetAlbum
+    private val getAlbum: GetAlbum,
 ) : BaseViewModel() {
     var id = 0
         set(value) {

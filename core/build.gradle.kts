@@ -39,6 +39,7 @@ dependencies {
     testImplementation(Deps.Test.junit)
     testImplementation(Deps.Test.mockk)
     testImplementation(Deps.Test.kluent)
+    testImplementation(Deps.Test.coroutinesTest)
 
     androidTestImplementation(Deps.AndroidTest.junit)
 }

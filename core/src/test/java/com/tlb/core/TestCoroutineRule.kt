@@ -1,4 +1,4 @@
-package com.tlb.testleboncoin
+package com.tlb.core
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

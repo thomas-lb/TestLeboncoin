@@ -8,7 +8,7 @@ import com.tlb.core.interactors.GetAlbums
 import com.tlb.testleboncoin.CoroutinesTestRule
 import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.Before
 import org.junit.Rule
@@ -53,7 +53,7 @@ class AlbumsViewModelTest {
     }
 
     @Test
-    fun `Fetch albums with success`() = testCoroutineRule.testDispatcher.runBlockingTest {
+    fun `Fetch albums with success`() = runTest {
         coEvery { getAlbums() } returns successResult
 
         val albumsViewModel = getFreshViewModel()
@@ -66,32 +66,30 @@ class AlbumsViewModelTest {
     }
 
     @Test
-    fun `Try to fetch albums but get NotFound error`() =
-        testCoroutineRule.testDispatcher.runBlockingTest {
-            coEvery { getAlbums() } returns notFoundResult
+    fun `Try to fetch albums but get NotFound error`() = runTest {
+        coEvery { getAlbums() } returns notFoundResult
 
-            val albumsViewModel = getFreshViewModel()
-            albumsViewModel.fetchData()
+        val albumsViewModel = getFreshViewModel()
+        albumsViewModel.fetchData()
 
-            albumsViewModel.albumsData.value shouldBeEqualTo null
-            albumsViewModel.errorData.value shouldBeEqualTo notFoundResult
+        albumsViewModel.albumsData.value shouldBeEqualTo null
+        albumsViewModel.errorData.value shouldBeEqualTo notFoundResult
 
-            removeObservers(albumsViewModel)
-        }
+        removeObservers(albumsViewModel)
+    }
 
     @Test
-    fun `Try to fetch albums but get Unknown error`() =
-        testCoroutineRule.testDispatcher.runBlockingTest {
-            coEvery { getAlbums() } returns unknownResult
+    fun `Try to fetch albums but get Unknown error`() = runTest {
+        coEvery { getAlbums() } returns unknownResult
 
-            val albumsViewModel = getFreshViewModel()
-            albumsViewModel.fetchData()
+        val albumsViewModel = getFreshViewModel()
+        albumsViewModel.fetchData()
 
-            albumsViewModel.albumsData.value shouldBeEqualTo null
-            albumsViewModel.errorData.value shouldBeEqualTo unknownResult
+        albumsViewModel.albumsData.value shouldBeEqualTo null
+        albumsViewModel.errorData.value shouldBeEqualTo unknownResult
 
-            removeObservers(albumsViewModel)
-        }
+        removeObservers(albumsViewModel)
+    }
 
     private fun getFreshViewModel() = AlbumsViewModel(getAlbums).apply {
         albumsData.observeForever(albumsObserver)

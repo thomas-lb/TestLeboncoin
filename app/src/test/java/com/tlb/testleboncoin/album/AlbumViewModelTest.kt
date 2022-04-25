@@ -8,7 +8,7 @@ import com.tlb.core.interactors.GetAlbum
 import com.tlb.testleboncoin.CoroutinesTestRule
 import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.After
 import org.junit.Before
@@ -33,7 +33,9 @@ class AlbumViewModelTest {
     private val albumObserver: Observer<Album> = mockk()
     private val errorObserver: Observer<Result.Error<*>> = mockk()
 
-    private val albumViewModel = spyk(AlbumViewModel(getAlbum))
+    private val albumViewModel = spyk(
+        AlbumViewModel(getAlbum)
+    )
 
     @Before
     fun setUp() {
@@ -65,21 +67,21 @@ class AlbumViewModelTest {
     }
 
     @Test
-    fun `Fetch album with success`() = testCoroutineRule.testDispatcher.runBlockingTest {
+    fun `Fetch album with success`() = runTest {
         albumViewModel.fetchData(SUCCESS_ALBUM_ID)
 
         albumViewModel.albumData.value shouldBeEqualTo album
     }
 
     @Test
-    fun `Try to fetch not found album`() = testCoroutineRule.testDispatcher.runBlockingTest {
+    fun `Try to fetch not found album`() = runTest {
         albumViewModel.fetchData(NOT_FOUND_ALBUM_ID)
 
         albumViewModel.errorData.value shouldBeEqualTo notFoundResult
     }
 
     @Test
-    fun `Try to fetch unknown album`() = testCoroutineRule.testDispatcher.runBlockingTest {
+    fun `Try to fetch unknown album`() = runTest {
         albumViewModel.fetchData(UNKNOWN_ALBUM_ID)
 
         albumViewModel.errorData.value shouldBeEqualTo unknownResult
