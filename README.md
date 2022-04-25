@@ -4,6 +4,7 @@ Thomas Le Bihan
 This project is an app displaying albums from an API.
 Datas loaded by the API are stored in a local database and used if a network error happens on next launchs.
 The lists scrolls are saved when configuration changed.
+The app supports dark theme based on phone configuration.
 
 ## Architecture
 The project is based on an MVVM/clean architecture architecture.
